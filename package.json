@@ -6,5 +6,5 @@
     "dev": "next dev",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --right ."
-}
+  }
 }
