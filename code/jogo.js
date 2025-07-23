@@ -1,10 +1,10 @@
-import {commonCards, defeatCards, evolutionCards} from "./cards.js";
+import { commonCards, defeatCards, evolutionCards } from "./cards.js";
 
 const stats = {
-  ecology: {value: 50, maxValue: 100},
-  population: {value: 50, maxValue: 100},
-  army: {value: 50, maxValue: 100},
-  economy: {value: 50, maxValue: 100},
+  ecology: { value: 50, maxValue: 100 },
+  population: { value: 50, maxValue: 100 },
+  army: { value: 50, maxValue: 100 },
+  economy: { value: 50, maxValue: 100 },
 }
 let cardIndex = 0;
 let currentCard;
@@ -12,21 +12,21 @@ const statKeys = ['ecology', 'population', 'army', 'economy'];
 const rightButton = document.getElementById('rightButton');
 const leftButton = document.getElementById('leftButton');
 let persistentEffects = {}
-function checkButtonEffects(buttonEffects){
+function checkButtonEffects(buttonEffects) {
   if (buttonEffects.persistent) {
     updatePersistentEffects(buttonEffects);
     addPersistentEffect();
   }
 }
-function updatePersistentEffects(buttonEffects){
+function updatePersistentEffects(buttonEffects) {
   persistentEffects = {};
   Object.assign(persistentEffects, buttonEffects.persistent);
 }
-function addPersistentEffect(){
+function addPersistentEffect() {
   for (const singleStat in persistentEffects) {
-      const affectedStat = document.getElementById(singleStat)
-      if (persistentEffects[singleStat] > 0) {affectedStat.parentElement.classList.add("persistentPositiveEffect")};
-      if (persistentEffects[singleStat] < 0) {affectedStat.parentElement.classList.add("persistentNegativeEffect")};
+    const affectedStat = document.getElementById(singleStat)
+    if (persistentEffects[singleStat] > 0) { affectedStat.parentElement.classList.add("persistentPositiveEffect") };
+    if (persistentEffects[singleStat] < 0) { affectedStat.parentElement.classList.add("persistentNegativeEffect") };
   }
 }
 rightButton.addEventListener('click', () => {
@@ -46,16 +46,16 @@ leftButton.addEventListener('mouseover', () => showEffects(currentCard.effects.l
 });
 const allButtons = document.querySelectorAll("button")
 function disableButtons() {
-    allButtons.forEach(button => {
-        button.classList.add("disabled")
-    })
+  allButtons.forEach(button => {
+    button.classList.add("disabled")
+  })
 }
 function enableButtons() {
-    allButtons.forEach(button => {
-        button.classList.remove("disabled")
-    })
+  allButtons.forEach(button => {
+    button.classList.remove("disabled")
+  })
 }
-function showButtons(){
+function showButtons() {
   rightButton.textContent = currentCard.rightButtonText;
   leftButton.textContent = currentCard.leftButtonText;
 }
@@ -78,14 +78,14 @@ function cleanEffects() {
   });
 }
 const visualCardText = document.getElementById('cardText');
-function showText(){
+function showText() {
   const cardText = currentCard.text;
   let i = 0;
   visualCardText.textContent = ''
   const typingInterval = setInterval(() => {
     visualCardText.textContent += cardText[i];
     i = i + 1;
-    if (i === cardText.length){
+    if (i === cardText.length) {
       clearInterval(typingInterval);
       enableButtons();
       return;
@@ -98,24 +98,24 @@ function showCard() {
 }
 function applyEffects(buttonEffects) {
   const finalStat = {};
-  if (Object.keys(persistentEffects).length > 0){
-   applyPersistentEffects(finalStat)
+  if (Object.keys(persistentEffects).length > 0) {
+    applyPersistentEffects(finalStat)
   }
   applyCommonEffects(finalStat, buttonEffects.commonEffects)
   checkStats(finalStat);
   applyingEffectsAnimation(finalStat);
 }
-function applyCommonEffects(finalStat, buttonEffects){
+function applyCommonEffects(finalStat, buttonEffects) {
   for (const singleStat in buttonEffects) {
     finalStat[singleStat] = (finalStat[singleStat] || stats[singleStat].value) + buttonEffects[singleStat];
   }
 }
-function applyPersistentEffects(finalStat){
-  for (const singleStat in persistentEffects){
+function applyPersistentEffects(finalStat) {
+  for (const singleStat in persistentEffects) {
     finalStat[singleStat] = (finalStat[singleStat] || stats[singleStat].value) + persistentEffects[singleStat];
   }
 }
-function applyingEffectsAnimation(finalStat){
+function applyingEffectsAnimation(finalStat) {
   for (const singleStat in finalStat) {
     const step = finalStat[singleStat] > stats[singleStat].value ? 1 : -1;
     const countingInterval = setInterval(() => {
@@ -128,8 +128,8 @@ function applyingEffectsAnimation(finalStat){
     }, 60);
   }
 }
-function checkStats(finalStat){
-  for (const singleStat in stats){
+function checkStats(finalStat) {
+  for (const singleStat in stats) {
     if (finalStat[singleStat] <= 0) {
       currentCard = defeatCards.find(card => card.stat === singleStat)
       return;
@@ -143,7 +143,7 @@ function checkStats(finalStat){
   currentCard = commonCards[cardIndex]
 }
 let cardsAlreadyDrawn = []
-function drawCards(){
+function drawCards() {
   if (cardsAlreadyDrawn.length === commonCards.length) {
     return;
   }
@@ -164,7 +164,7 @@ function updateStats() {
     document.getElementById(singleStat).textContent = stats[singleStat].value;
   });
 }
-function startGame(){
+function startGame() {
   updateStats()
   drawCards()
   currentCard = commonCards[cardIndex]
