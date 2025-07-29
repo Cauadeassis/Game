@@ -1,46 +1,46 @@
-*{
+* {
     margin: 0px;
     transition: 0.3s;
 }
-#countryName{
+#countryName {
     text-align: center;
     font-size: 40px;
     font-family: sans-serif;
     margin-bottom: 10px;
 }
-#gameHeader{
+#gameHeader {
     padding-top: 30px;
     padding-bottom: 15px;
     background-color: rgb(19, 39, 39);
     color: white;
 }
-#stats{
+#stats {
     display: flex;
     justify-content: center;
 }
-.singleStat{
+.singleStat {
     display: inline-block;
     margin: 15px;
     text-align: center;
     font-size: 25px;
     font-family: sans-serif;
 }
-#gameBody{
+#gameBody {
     padding: 15px;
     background-color: rgba(19, 39, 39, 10%);
     text-align: center;
 }
-#card{
+#card {
     text-align: center;
 }
-#cardText{
+#cardText {
     font-size: 30px;
     max-width: 750px;
     margin: 0 auto;
     margin-bottom: 15px;
     margin-top: 15px;
 }
-.cardChoices{
+.cardChoices {
     user-select: none;
     background-color: rgba(255, 255, 255, 50%);
     margin: 15px;
@@ -49,42 +49,48 @@
     border-radius: 5px;
     padding: 10px;
 }
-.cardChoices:hover{
+.cardChoices:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
-.disabled{
+.disabled {
     pointer-events: none;
 }
-.singleStatSpan{
+.singleStatSpan {
     display: inline-block;
 }
-.greenStat{
-    color:rgb(100, 158, 13);
+.greenStat {
+    color: rgb(100, 158, 13);
     transform: scale(1.1);
 }
-.redStat{
+.redStat {
     color: red;
 }
-.persistentPositiveEffect::after, .persistentNegativeEffect::after {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-left: 5px;
-  margin-bottom: 5px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: blink 4s infinite;
+.persistentPositiveEffect::after,
+.persistentNegativeEffect::after {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: blink 4s infinite;
 }
-.persistentPositiveEffect::after{
+.persistentPositiveEffect::after {
     background-image: url("upArrow.png");
 }
-.persistentNegativeEffect::after{
+.persistentNegativeEffect::after {
     background-image: url("downArrow.png");
 }
 @keyframes blink {
-    0%, 100% {opacity: 100%;}
-    50% {opacity: 0%}
+    0%,
+    100% {
+        opacity: 100%;
+    }
+    50% {
+        opacity: 0%;
+    }
 }
